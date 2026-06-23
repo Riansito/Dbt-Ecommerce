@@ -1,0 +1,13 @@
+version: 2
+
+sources :
+
+  - name: bronze
+
+    tables:
+      - name: raw_clientes
+      - name: raw_produtos
+      - name: raw_vendas
+      - name: raw_pagamentos
+      - name: raw_entregas
+      - name: raw_estoque
