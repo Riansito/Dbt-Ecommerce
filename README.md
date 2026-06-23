@@ -90,7 +90,7 @@ Power BI / IA Generativa
 
 ## 📌 Arquitetura Completa
 
-<img width="1693" height="929" alt="arquitetura_projeto_dbt" src="https://github.com/user-attachments/assets/f481a02e-14b5-4499-b812-494edeb7470c" />
+<img width="1920" height="1080" alt="Design sem nome" src="https://github.com/user-attachments/assets/01ec2c93-f983-4cf4-a96d-fc28837799b4" />
 
 ---
 
