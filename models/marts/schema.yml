@@ -1,0 +1,80 @@
+version: 2
+
+models:
+
+  - name: dim_clientes
+    description: Dimensão de clientes.
+
+    columns:
+      - name: id_cliente
+        description: Chave primária da dimensão cliente.
+        tests:
+          - unique
+          - not_null
+
+      - name: nome
+        description: Nome do cliente.
+        tests:
+          - not_null
+
+  - name: dim_produtos
+    description: Dimensão de produtos.
+
+    columns:
+      - name: id_produto
+        description: Chave primária da dimensão produto.
+        tests:
+          - unique
+          - not_null
+
+      - name: nome_produto
+        description: Nome do produto.
+        tests:
+          - not_null
+
+      - name: categoria
+        description: Categoria padronizada do produto.
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - "Eletrônicos"
+                - "Informática"
+                - "Games"
+
+  - name: fact_vendas
+    description: Tabela fato contendo as vendas realizadas.
+
+    columns:
+
+      - name: id_venda
+        description: Identificador único da venda.
+        tests:
+          - unique
+          - not_null
+
+      - name: id_cliente
+        description: Cliente responsável pela compra.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_clientes')
+              field: id_cliente
+
+      - name: id_produto
+        description: Produto vendido.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_produtos')
+              field: id_produto
+
+      - name: quantidade
+        description: Quantidade vendida.
+        tests:
+          - not_null
+
+      - name: valor_total
+        description: Valor total da venda.
+        tests:
+          - not_null
