@@ -11,7 +11,7 @@ renamed AS (
             WHEN LOWER(categoria) = 'games' THEN 'Games'
             WHEN LOWER(categoria) = 'informatica' THEN 'Informática'
             ELSE 'Outros'
-        END AS categoria_corrigida
+        END AS categoria,
         SAFE_CAST(preco AS FLOAT64) AS preco,
     FROM source
 )
