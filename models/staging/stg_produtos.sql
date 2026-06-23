@@ -6,7 +6,12 @@ renamed AS (
     SELECT 
         CAST(id_produto AS INTEGER)	AS id_produto,
         CAST(nome_produto AS STRING) AS nome_produto,
-        CAST(categoria AS STRING)	AS categoria,
+        CASE 
+            WHEN LOWER(categoria) IN ('eletronicos', 'eletrônicos') THEN 'Eletrônicos'
+            WHEN LOWER(categoria) = 'games' THEN 'Games'
+            WHEN LOWER(categoria) = 'informatica' THEN 'Informática'
+            ELSE 'Outros'
+        END AS categoria_corrigida
         SAFE_CAST(preco AS FLOAT64) AS preco,
     FROM source
 )
