@@ -29,11 +29,11 @@ jobs:
           uv sync --frozen
           uv run pre-commit install
 
-      - name: Run Pre-Commit Hooks
-        run: uv run pre-commit run --all-files
-
       - name: Run dbt deps
         run: uv run dbt deps
+
+      - name: Run Pre-Commit Hooks
+        run: uv run pre-commit run --all-files
 
       - name: Run dbt tests
         env:
