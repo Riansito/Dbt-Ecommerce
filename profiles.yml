@@ -1,0 +1,32 @@
+# profiles.yml
+e_comerce:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT_ID', 'meu-projeto-gcp') }}"
+      dataset: "{{ env_var('GCP_DATASET', 'ecommerce') }}"
+      threads: 4
+      timeout_seconds: 300
+      location: US
+
+    ci:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: "{{ env_var('GCP_DATASET') }}_ci"
+      threads: 4
+      timeout_seconds: 300
+      location: US
+      keyfile: "{{ env_var('GCP_KEYFILE_PATH', '/caminho/padrao/keyfile.json') }}"
+
+    prod:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: "{{ env_var('GCP_DATASET') }}_prod"
+      threads: 4
+      timeout_seconds: 300
+      location: US
+      keyfile: "{{ env_var('GCP_KEYFILE_PATH', '/caminho/padrao/keyfile.json') }}"
