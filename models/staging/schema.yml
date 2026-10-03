@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: stg_clientes
+    description: "Tabela limpa de clientes da camada silver."
+    columns:
+      - name: id_cliente
+        tests:
+          - not_null
+          - unique
+      - name: email
+        tests:
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'

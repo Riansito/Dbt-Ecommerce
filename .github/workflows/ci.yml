@@ -1,0 +1,48 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Install Dependencies
+        run: |
+          uv sync --frozen
+          uv run pre-commit install
+
+      - name: Run Pre-Commit Hooks
+        run: uv run pre-commit run --all-files
+
+      - name: Run dbt deps
+        run: uv run dbt deps
+
+      - name: Run dbt tests
+        env:
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GCP_DATASET: ${{ secrets.GCP_DATASET }}
+          GCP_KEYFILE_PATH: /tmp/gcp_key.json
+        run: |
+          # Simula a criacao do arquivo de credenciais a partir das secrets do GitHub (Exemplo)
+          # echo "${{ secrets.GCP_SA_KEY }}" > /tmp/gcp_key.json
+          # uv run dbt test --target ci
+          echo "dbt test foi pulado por depender de credenciais no GitHub Secrets."
+          echo "Descomente o passo quando as variáveis estiverem configuradas no repositório."
