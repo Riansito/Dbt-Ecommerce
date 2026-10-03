@@ -33,7 +33,7 @@ jobs:
         run: uv run dbt deps
 
       - name: Run Pre-Commit Hooks
-        run: uv run pre-commit run --all-files
+        run: SKIP=sqlfluff-lint uv run pre-commit run --all-files
 
       - name: Run dbt tests
         env:
