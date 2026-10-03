@@ -1,9 +1,9 @@
-with 
+with
 source AS (
     SELECT * FROM {{ source("bronze" , "raw_clientes")}}
 ),
 renamed AS (
-    SELECT 
+    SELECT
         CAST(id_cliente AS INTEGER)	AS id_cliente,
         INITCAP(CAST(nome AS STRING)) AS nome,
         CAST(email AS STRING) AS email,
