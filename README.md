@@ -283,22 +283,35 @@ O Power BI consome os dados da camada Gold para construção de dashboards execu
 </p>
 ---
 
-# 🧪 Testes de Qualidade com dbt
+# 🧪 Testes de Qualidade e Validações
 
-O projeto pode ser validado através dos testes nativos do dbt.
+O projeto garante a qualidade do código e dos dados através de múltiplas camadas de validação.
 
-Exemplos:
+## Testes Nativos do dbt e dbt_expectations
+
+O projeto é validado através dos testes nativos do dbt e estendido pelo pacote **dbt_expectations**.
+
+Exemplos de testes:
 
 * `not_null`
 * `unique`
 * `accepted_values`
 * `relationships`
+* Utilização do **dbt_expectations** para testes mais robustos de dados (ex: checagem de padrões, limites numéricos, formato de dados).
 
 Objetivos:
 
 * Garantir integridade dos dados;
 * Evitar registros inválidos;
 * Monitorar qualidade do pipeline.
+
+## Padronização e Qualidade de Código (pre-commit)
+
+Foi implementado um pipeline de **pre-commit** para garantir a qualidade do código fonte antes de cada commit no repositório:
+
+* **SQLFluff**: Linter especializado em SQL, integrado ao dbt para analisar e corrigir o estilo e formatação das queries automaticamente.
+* **Ruff**: Linter e formatador extremamente rápido utilizado para arquivos Python.
+* **Pre-commit hooks**: Verificação automatizada de YAML, espaços em branco no final de linha, e detecção de arquivos muito grandes ou chaves privadas antes do commit.
 
 ---
 
@@ -312,6 +325,10 @@ Objetivos:
 * Power BI
 * Git
 * GitHub
+* **pre-commit** (Automação de hooks)
+* **SQLFluff** (Linting e formatação SQL)
+* **Ruff** (Linting e formatação Python)
+* **dbt_expectations** (Testes avançados no dbt)
 
 ---
 
